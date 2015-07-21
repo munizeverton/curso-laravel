@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 
-class DatabaseSeeder extends Seeder
+class ClientTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,8 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
-
-        Model::reguard();
+        \CursoLaravel\Client::truncate();
+        factory(\CursoLaravel\Client::class, 10)->create();
     }
 }
