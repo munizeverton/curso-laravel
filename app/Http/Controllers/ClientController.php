@@ -2,6 +2,7 @@
 
 namespace CursoLaravel\Http\Controllers;
 
+use CursoLaravel\Client;
 use Illuminate\Http\Request;
 
 use CursoLaravel\Http\Requests;
@@ -16,7 +17,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return \CursoLaravel\Client::all();
+        return Client::all();
     }
 
     /**
@@ -37,7 +38,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Client::create($request->all());
     }
 
     /**
