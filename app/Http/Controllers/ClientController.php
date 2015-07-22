@@ -2,7 +2,7 @@
 
 namespace CursoLaravel\Http\Controllers;
 
-use CursoLaravel\Client;
+use CursoLaravel\Models\Client;
 use Illuminate\Http\Request;
 
 use CursoLaravel\Http\Requests;
