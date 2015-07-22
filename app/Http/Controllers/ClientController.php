@@ -72,7 +72,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Client::firstOrNew(['id' => $id])->update($request->all());
     }
 
     /**
