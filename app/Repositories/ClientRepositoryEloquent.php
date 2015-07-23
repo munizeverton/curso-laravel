@@ -8,9 +8,13 @@
 
 namespace CursoLaravel\Repositories;
 
+use CursoLaravel\Entities\Client;
+use Prettus\Repository\Eloquent\BaseRepository;
 
-class ClientRepositoryEloquent {
-
-
-
+class ClientRepositoryEloquent extends BaseRepository
+{
+    public function model()
+    {
+        return Client::class;
+    }
 }

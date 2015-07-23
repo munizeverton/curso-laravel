@@ -3,6 +3,7 @@
 namespace CursoLaravel\Http\Controllers;
 
 use CursoLaravel\Entities\Client;
+use CursoLaravel\Repositories\ClientRepositoryEloquent;
 use Illuminate\Http\Request;
 
 use CursoLaravel\Http\Requests;
@@ -13,11 +14,12 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param ClientRepositoryEloquent $repository
      * @return Response
      */
-    public function index()
+    public function index(ClientRepositoryEloquent $repository)
     {
-        return Client::all();
+        return $repository->all();
     }
 
     /**
