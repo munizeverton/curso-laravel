@@ -88,8 +88,11 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $this->repository->update($request->all(), $id);
+        try {
+            $this->repository->update($request->all(), $id);
+        } catch (ModelNotFoundException $e) {
+            throw new Exception("Client {$id} not found");
+        }
     }
 
     /**
