@@ -3,7 +3,9 @@
 namespace CursoLaravel\Http\Controllers;
 
 use CursoLaravel\Repositories\ClientRepository;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use League\Flysystem\Exception;
 
 class ClientController extends Controller
 {
@@ -53,12 +55,17 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
+     * @throws Exception
      */
     public function show($id)
     {
-        return $this->repository->find($id);
+        try {
+            return $this->repository->find($id);
+        } catch (ModelNotFoundException $e) {
+            throw new Exception("Client {$id} not found");
+        }
     }
 
     /**
@@ -81,6 +88,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $this->repository->update($request->all(), $id);
     }
 
@@ -92,6 +100,6 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        Client::find($id)->delete();
+        $this->repository->delete($id);
     }
 }
