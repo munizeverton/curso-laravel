@@ -82,9 +82,10 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request $request
+     * @param  int     $id
      * @return Response
+     * @throws Exception
      */
     public function update(Request $request, $id)
     {
