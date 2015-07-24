@@ -31,3 +31,4 @@ $factory->define(CursoLaravel\Entities\Client::class, function (Faker\Generator 
         'obs' => $faker->text(),
     ];
 });
+
