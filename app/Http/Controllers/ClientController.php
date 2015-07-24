@@ -3,6 +3,7 @@
 namespace CursoLaravel\Http\Controllers;
 
 use CursoLaravel\Repositories\ClientRepository;
+use CursoLaravel\Services\ClientService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use League\Flysystem\Exception;
@@ -15,9 +16,15 @@ class ClientController extends Controller
      */
     private $repository;
 
-    public function __construct(ClientRepository $repository)
+    /**
+     * @var ClientService
+     */
+    private $service;
+
+    public function __construct(ClientRepository $repository, ClientService $service)
     {
         $this->repository = $repository;
+        $this->service    = $service;
     }
 
     /**
@@ -28,7 +35,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return $this->repository->all();
+        return $this->service->getList();
     }
 
     /**
@@ -49,7 +56,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->repository->create($request->all());
+        return $this->service->create($request->all());
     }
 
     /**
@@ -61,11 +68,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        try {
-            return $this->repository->find($id);
-        } catch (ModelNotFoundException $e) {
-            throw new Exception("Client {$id} not found");
-        }
+        return $this->service->show($id);
     }
 
     /**
@@ -85,15 +88,10 @@ class ClientController extends Controller
      * @param  Request $request
      * @param  int     $id
      * @return Response
-     * @throws Exception
      */
     public function update(Request $request, $id)
     {
-        try {
-            $this->repository->update($request->all(), $id);
-        } catch (ModelNotFoundException $e) {
-            throw new Exception("Client {$id} not found");
-        }
+        return $this->service->update($request->all(), $id);
     }
 
     /**
@@ -104,6 +102,6 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        $this->repository->delete($id);
+        $this->service->delete($id);
     }
 }
