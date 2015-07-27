@@ -32,3 +32,14 @@ $factory->define(CursoLaravel\Entities\Client::class, function (Faker\Generator 
     ];
 });
 
+$factory->define(CursoLaravel\Entities\Project::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'description' => $faker->text(),
+        'progress' => $faker->randomElement([1,2,3,4]),
+        'status' => $faker->text(),
+        'due_date' => $faker->dateTime,
+        'owner_id' => $faker->randomElement([1,2,3,4,5,6,7,8,9,10]),
+        'client_id' => $faker->randomElement([1,2,3,4,5,6,7,8,9,10]),
+    ];
+});
