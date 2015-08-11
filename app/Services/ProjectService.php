@@ -26,7 +26,7 @@ class ProjectService
     public function show($id)
     {
         try {
-            return $this->repository->with('client')->with('user')->find($id);
+            return $this->repository->with('client')->with('user')->with('notes')->find($id);
         } catch (ModelNotFoundException $e) {
             return [
                 'error' => true,
@@ -38,7 +38,7 @@ class ProjectService
     public function getList()
     {
         try {
-            return $this->repository->with('client')->with('user')->all();
+            return $this->repository->with('client')->with('user')->with('notes')->all();
         } catch (\Exception $e) {
             return [
                 'error'   => true,
