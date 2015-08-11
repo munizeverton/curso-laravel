@@ -26,4 +26,9 @@ class Project extends Model
         return $this->belongsTo(\CursoLaravel\Entities\User::class, 'owner_id');
     }
 
+    public function notes()
+    {
+        return $this->hasMany(\CursoLaravel\Entities\ProjectNote::class);
+    }
+
 }
