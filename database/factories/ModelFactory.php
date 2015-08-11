@@ -43,3 +43,11 @@ $factory->define(CursoLaravel\Entities\Project::class, function (Faker\Generator
         'client_id' => $faker->randomElement([1,2,3,4,5,6,7,8,9,10]),
     ];
 });
+
+$factory->define(CursoLaravel\Entities\ProjectNote::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->word,
+        'note'  => $faker->paragraph,
+        'project_id' => rand(1,5),
+    ];
+});

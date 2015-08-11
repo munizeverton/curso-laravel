@@ -4,6 +4,7 @@ namespace CursoLaravel\Providers;
 
 use CursoLaravel\Repositories\ClientRepository;
 use CursoLaravel\Repositories\ClientRepositoryEloquent;
+use CursoLaravel\Repositories\ProjectNoteRepositoryEloquent;
 use CursoLaravel\Repositories\ProjectRepository;
 use CursoLaravel\Repositories\ProjectRepositoryEloquent;
 use Illuminate\Support\ServiceProvider;
@@ -35,6 +36,11 @@ class CursoLaravelRepositoryProvider extends ServiceProvider
         $this->app->bind(
             ProjectRepository::class,
             ProjectRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            ProjectNote::class,
+            ProjectNoteRepositoryEloquent::class
         );
     }
 }
