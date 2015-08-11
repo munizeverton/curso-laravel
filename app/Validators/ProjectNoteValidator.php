@@ -4,7 +4,7 @@ namespace CursoLaravel\Validators;
 
 use Prettus\Validator\LaravelValidator;
 
-class ProjectValidator extends LaravelValidator
+class ProjectNoteValidator extends LaravelValidator
 {
     protected $rules = [
         'project_id' => 'required|integer',

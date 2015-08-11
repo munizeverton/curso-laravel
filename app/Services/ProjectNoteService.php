@@ -2,22 +2,22 @@
 
 namespace CursoLaravel\Services;
 
-use CursoLaravel\Repositories\ProjectRepository;
-use CursoLaravel\Validators\ProjectValidator;
+use CursoLaravel\Repositories\ProjectNoteRepository;
+use CursoLaravel\Validators\ProjectNoteValidator;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Prettus\Validator\Exceptions\ValidatorException;
 
-class ProjectService
+class ProjectNoteService
 {
-    /** @var ProjectRepository */
+    /** @var ProjectNoteRepository */
     protected $repository;
 
-    /** @var  ProjectValidator */
+    /** @var  ProjectNoteValidator */
     protected $validator;
 
-    public function __construct(ProjectRepository $repository, ProjectValidator $validator)
+    public function __construct(ProjectNoteRepository $repository, ProjectNoteValidator $validator)
     {
         $this->repository = $repository;
         $this->validator = $validator;
@@ -26,11 +26,11 @@ class ProjectService
     public function show($id)
     {
         try {
-            return $this->repository->with('client')->with('user')->find($id);
+            return $this->repository->with('project')->find($id);
         } catch (ModelNotFoundException $e) {
             return [
                 'error' => true,
-                'message' => "Project {$id} not found",
+                'message' => "Project Note {$id} not found",
             ];
         }
     }
@@ -38,7 +38,7 @@ class ProjectService
     public function getList()
     {
         try {
-            return $this->repository->with('client')->with('user')->all();
+            return $this->repository->with('project')->all();
         } catch (\Exception $e) {
             return [
                 'error'   => true,
@@ -78,7 +78,7 @@ class ProjectService
         } catch (ModelNotFoundException $e) {
             return [
                 'error' => true,
-                'message' => "Project {$id} not found",
+                'message' => "Project Note {$id} not found",
             ];
         } catch (QueryException $e) {
             return [
@@ -95,7 +95,7 @@ class ProjectService
         } catch (ModelNotFoundException $e) {
             return [
                 'error' => true,
-                'message' => "Project {$id} not found",
+                'message' => "Project Note {$id} not found",
             ];
         }
     }
