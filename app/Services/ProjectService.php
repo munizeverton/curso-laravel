@@ -2,6 +2,7 @@
 
 namespace CursoLaravel\Services;
 
+use CursoLaravel\Repositories\ProjectMembersRepository;
 use CursoLaravel\Repositories\ProjectRepository;
 use CursoLaravel\Validators\ProjectValidator;
 
@@ -17,10 +18,14 @@ class ProjectService
     /** @var  ProjectValidator */
     protected $validator;
 
-    public function __construct(ProjectRepository $repository, ProjectValidator $validator)
+    /** @var  ProjectMembersRepository */
+    protected $projectMembersRepository;
+
+    public function __construct(ProjectRepository $repository, ProjectValidator $validator, ProjectMembersRepository $projectMembersRepository)
     {
         $this->repository = $repository;
         $this->validator = $validator;
+        $this->projectMembersRepository = $projectMembersRepository;
     }
 
     public function show($id)
@@ -98,6 +103,46 @@ class ProjectService
                 'message' => "Project {$id} not found",
             ];
         }
+    }
+
+    public function addMember($projectId, $memberId)
+    {
+        try {
+            $project = $this->repository->find($projectId);
+        } catch (ModelNotFoundException $e) {
+            return [
+                'error' => true,
+                'message' => "Project {$projectId} not found",
+            ];
+        }
+        
+        $project->members()->attach($memberId);
+    }
+
+    public function removeMember($projectId, $memberId)
+    {
+        try {
+            $project = $this->repository->find($projectId);
+        } catch (ModelNotFoundException $e) {
+            return [
+                'error' => true,
+                'message' => "Project {$projectId} not found",
+            ];
+        }
+
+        $project->members()->detach($memberId);
+    }
+
+    public function isMember($projectId, $memberId)
+    {
+
+        $project = $this->projectMembersRepository->findWhere(['project_id' => $projectId, 'user_id' => $memberId]);
+
+        if (count($project)){
+            return true;
+        }
+
+        return false;
     }
 
 }
