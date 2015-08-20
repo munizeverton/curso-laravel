@@ -13,7 +13,7 @@ class ProjectMembersService
 {
     /** @var ProjectMembersRepository */
     protected $repository;
-    
+
     public function __construct(ProjectMembersRepository $repository)
     {
         $this->repository = $repository;

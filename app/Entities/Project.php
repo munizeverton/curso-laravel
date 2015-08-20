@@ -36,4 +36,9 @@ class Project extends Model
         return $this->hasMany(\CursoLaravel\Entities\ProjectTask::class);
     }
 
+    public function members()
+    {
+        return $this->belongsToMany(\CursoLaravel\Entities\User::class, 'project_members');
+    }
+
 }
