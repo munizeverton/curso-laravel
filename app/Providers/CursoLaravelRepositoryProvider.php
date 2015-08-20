@@ -5,6 +5,8 @@ namespace CursoLaravel\Providers;
 use CursoLaravel\Entities\ProjectTask;
 use CursoLaravel\Repositories\ClientRepository;
 use CursoLaravel\Repositories\ClientRepositoryEloquent;
+use CursoLaravel\Repositories\ProjectMembersRepository;
+use CursoLaravel\Repositories\ProjectMembersRepositoryEloquent;
 use CursoLaravel\Repositories\ProjectNoteRepository;
 use CursoLaravel\Repositories\ProjectNoteRepositoryEloquent;
 use CursoLaravel\Repositories\ProjectRepository;
@@ -50,6 +52,11 @@ class CursoLaravelRepositoryProvider extends ServiceProvider
         $this->app->bind(
             ProjectTaskRepository::class,
             ProjectTaskRepositoryEloquent::class
+        );
+
+        $this->app->bind(
+            ProjectMembersRepository::class,
+            ProjectMembersRepositoryEloquent::class
         );
     }
 }
