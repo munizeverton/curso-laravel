@@ -31,4 +31,9 @@ class Project extends Model
         return $this->hasMany(\CursoLaravel\Entities\ProjectNote::class);
     }
 
+    public function tasks()
+    {
+        return $this->hasMany(\CursoLaravel\Entities\ProjectTask::class);
+    }
+
 }
