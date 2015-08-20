@@ -51,3 +51,13 @@ $factory->define(CursoLaravel\Entities\ProjectNote::class, function (Faker\Gener
         'project_id' => rand(1,5),
     ];
 });
+
+$factory->define(CursoLaravel\Entities\ProjectTask::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'start_date'  => $faker->dateTime,
+        'due_date'  => $faker->dateTime,
+        'status' => $faker->text(),
+        'project_id' => rand(1,5),
+    ];
+});
